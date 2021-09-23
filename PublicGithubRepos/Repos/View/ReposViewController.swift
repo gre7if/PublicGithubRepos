@@ -125,6 +125,6 @@ extension ReposViewController: UICollectionViewDelegateFlowLayout {
 
     // интервал между строками
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        2
+        1
     }
 }
