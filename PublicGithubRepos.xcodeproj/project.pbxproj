@@ -7,23 +7,39 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A159B0926FAA1B700F2A335 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A159B0826FAA1B700F2A335 /* Repository.swift */; };
+		4A159B1026FAAEC700F2A335 /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A159B0F26FAAEC700F2A335 /* NetworkClient.swift */; };
 		4A6C5A1826F94FBD00C07C9B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6C5A1726F94FBD00C07C9B /* AppDelegate.swift */; };
-		4A6C5A1A26F94FBD00C07C9B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6C5A1926F94FBD00C07C9B /* SceneDelegate.swift */; };
-		4A6C5A1C26F94FBD00C07C9B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6C5A1B26F94FBD00C07C9B /* ViewController.swift */; };
-		4A6C5A1F26F94FBD00C07C9B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A6C5A1D26F94FBD00C07C9B /* Main.storyboard */; };
 		4A6C5A2126F94FBF00C07C9B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A6C5A2026F94FBF00C07C9B /* Assets.xcassets */; };
 		4A6C5A2426F94FBF00C07C9B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A6C5A2226F94FBF00C07C9B /* LaunchScreen.storyboard */; };
+		4A6C5A2C26F9500C00C07C9B /* ReposViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6C5A2B26F9500C00C07C9B /* ReposViewController.swift */; };
+		4A6C5A2F26F9586B00C07C9B /* ReposCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6C5A2E26F9586B00C07C9B /* ReposCollectionViewCell.swift */; };
+		4AC07BB826FBC2ED00AA7DA7 /* RepoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC07BB726FBC2ED00AA7DA7 /* RepoViewModel.swift */; };
+		4AC07BBB26FBC69600AA7DA7 /* ReposView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC07BBA26FBC69600AA7DA7 /* ReposView.swift */; };
+		4AC07BBF26FBCB3C00AA7DA7 /* CollectionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC07BBE26FBCB3C00AA7DA7 /* CollectionExtensions.swift */; };
+		4AC07BC226FBD1E600AA7DA7 /* ReposBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC07BC126FBD1E600AA7DA7 /* ReposBuilder.swift */; };
+		4AC07BC426FBD1F600AA7DA7 /* ReposPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC07BC326FBD1F600AA7DA7 /* ReposPresenter.swift */; };
+		4AC07BC626FBD20A00AA7DA7 /* ReposService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC07BC526FBD20A00AA7DA7 /* ReposService.swift */; };
+		4AC07BC826FC218B00AA7DA7 /* DetailedRepoViewConntroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC07BC726FC218B00AA7DA7 /* DetailedRepoViewConntroller.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4A159B0826FAA1B700F2A335 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
+		4A159B0F26FAAEC700F2A335 /* NetworkClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
 		4A6C5A1426F94FBD00C07C9B /* PublicGithubRepos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PublicGithubRepos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A6C5A1726F94FBD00C07C9B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4A6C5A1926F94FBD00C07C9B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		4A6C5A1B26F94FBD00C07C9B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		4A6C5A1E26F94FBD00C07C9B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4A6C5A2026F94FBF00C07C9B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4A6C5A2326F94FBF00C07C9B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4A6C5A2526F94FBF00C07C9B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4A6C5A2B26F9500C00C07C9B /* ReposViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReposViewController.swift; sourceTree = "<group>"; };
+		4A6C5A2E26F9586B00C07C9B /* ReposCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReposCollectionViewCell.swift; sourceTree = "<group>"; };
+		4AC07BB726FBC2ED00AA7DA7 /* RepoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoViewModel.swift; sourceTree = "<group>"; };
+		4AC07BBA26FBC69600AA7DA7 /* ReposView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReposView.swift; sourceTree = "<group>"; };
+		4AC07BBE26FBCB3C00AA7DA7 /* CollectionExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionExtensions.swift; sourceTree = "<group>"; };
+		4AC07BC126FBD1E600AA7DA7 /* ReposBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReposBuilder.swift; sourceTree = "<group>"; };
+		4AC07BC326FBD1F600AA7DA7 /* ReposPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReposPresenter.swift; path = "../../../../../../Library/Mobile Documents/com~apple~CloudDocs/ReposPresenter.swift"; sourceTree = "<group>"; };
+		4AC07BC526FBD20A00AA7DA7 /* ReposService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReposService.swift; path = ../../../../../../Downloads/ReposService.swift; sourceTree = "<group>"; };
+		4AC07BC726FC218B00AA7DA7 /* DetailedRepoViewConntroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedRepoViewConntroller.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +53,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4A159B0726FAA19600F2A335 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4A159B0826FAA1B700F2A335 /* Repository.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		4A159B0A26FAA43000F2A335 /* CoreLayer */ = {
+			isa = PBXGroup;
+			children = (
+				4A159B0F26FAAEC700F2A335 /* NetworkClient.swift */,
+			);
+			path = CoreLayer;
+			sourceTree = "<group>";
+		};
 		4A6C5A0B26F94FBD00C07C9B = {
 			isa = PBXGroup;
 			children = (
@@ -56,15 +88,71 @@
 		4A6C5A1626F94FBD00C07C9B /* PublicGithubRepos */ = {
 			isa = PBXGroup;
 			children = (
-				4A6C5A1726F94FBD00C07C9B /* AppDelegate.swift */,
-				4A6C5A1926F94FBD00C07C9B /* SceneDelegate.swift */,
-				4A6C5A1B26F94FBD00C07C9B /* ViewController.swift */,
-				4A6C5A1D26F94FBD00C07C9B /* Main.storyboard */,
-				4A6C5A2026F94FBF00C07C9B /* Assets.xcassets */,
-				4A6C5A2226F94FBF00C07C9B /* LaunchScreen.storyboard */,
+				4A159B0726FAA19600F2A335 /* Models */,
+				4A159B0A26FAA43000F2A335 /* CoreLayer */,
+				4A6C5A3026F9587000C07C9B /* Repos */,
+				4AC07BC926FC218E00AA7DA7 /* DetailedRepo */,
+				4AC07BC026FBCB4000AA7DA7 /* Extensions */,
+				4A6C5A2D26F9502100C07C9B /* AppSupport */,
 				4A6C5A2526F94FBF00C07C9B /* Info.plist */,
 			);
 			path = PublicGithubRepos;
+			sourceTree = "<group>";
+		};
+		4A6C5A2D26F9502100C07C9B /* AppSupport */ = {
+			isa = PBXGroup;
+			children = (
+				4A6C5A1726F94FBD00C07C9B /* AppDelegate.swift */,
+				4A6C5A2026F94FBF00C07C9B /* Assets.xcassets */,
+				4A6C5A2226F94FBF00C07C9B /* LaunchScreen.storyboard */,
+			);
+			path = AppSupport;
+			sourceTree = "<group>";
+		};
+		4A6C5A3026F9587000C07C9B /* Repos */ = {
+			isa = PBXGroup;
+			children = (
+				4AC07BB926FBC30000AA7DA7 /* ViewModel */,
+				4A6C5A3126F9587600C07C9B /* View */,
+				4AC07BC126FBD1E600AA7DA7 /* ReposBuilder.swift */,
+				4AC07BC326FBD1F600AA7DA7 /* ReposPresenter.swift */,
+				4AC07BC526FBD20A00AA7DA7 /* ReposService.swift */,
+			);
+			path = Repos;
+			sourceTree = "<group>";
+		};
+		4A6C5A3126F9587600C07C9B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4A6C5A2E26F9586B00C07C9B /* ReposCollectionViewCell.swift */,
+				4AC07BBA26FBC69600AA7DA7 /* ReposView.swift */,
+				4A6C5A2B26F9500C00C07C9B /* ReposViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4AC07BB926FBC30000AA7DA7 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				4AC07BB726FBC2ED00AA7DA7 /* RepoViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		4AC07BC026FBCB4000AA7DA7 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4AC07BBE26FBCB3C00AA7DA7 /* CollectionExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		4AC07BC926FC218E00AA7DA7 /* DetailedRepo */ = {
+			isa = PBXGroup;
+			children = (
+				4AC07BC726FC218B00AA7DA7 /* DetailedRepoViewConntroller.swift */,
+			);
+			path = DetailedRepo;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -126,7 +214,6 @@
 			files = (
 				4A6C5A2426F94FBF00C07C9B /* LaunchScreen.storyboard in Resources */,
 				4A6C5A2126F94FBF00C07C9B /* Assets.xcassets in Resources */,
-				4A6C5A1F26F94FBD00C07C9B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,23 +224,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4A6C5A1C26F94FBD00C07C9B /* ViewController.swift in Sources */,
+				4A6C5A2C26F9500C00C07C9B /* ReposViewController.swift in Sources */,
+				4AC07BC826FC218B00AA7DA7 /* DetailedRepoViewConntroller.swift in Sources */,
+				4AC07BC226FBD1E600AA7DA7 /* ReposBuilder.swift in Sources */,
+				4AC07BC426FBD1F600AA7DA7 /* ReposPresenter.swift in Sources */,
+				4AC07BBF26FBCB3C00AA7DA7 /* CollectionExtensions.swift in Sources */,
+				4A159B1026FAAEC700F2A335 /* NetworkClient.swift in Sources */,
+				4A6C5A2F26F9586B00C07C9B /* ReposCollectionViewCell.swift in Sources */,
+				4AC07BC626FBD20A00AA7DA7 /* ReposService.swift in Sources */,
+				4A159B0926FAA1B700F2A335 /* Repository.swift in Sources */,
+				4AC07BB826FBC2ED00AA7DA7 /* RepoViewModel.swift in Sources */,
+				4AC07BBB26FBC69600AA7DA7 /* ReposView.swift in Sources */,
 				4A6C5A1826F94FBD00C07C9B /* AppDelegate.swift in Sources */,
-				4A6C5A1A26F94FBD00C07C9B /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		4A6C5A1D26F94FBD00C07C9B /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4A6C5A1E26F94FBD00C07C9B /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		4A6C5A2226F94FBF00C07C9B /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -288,6 +376,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = PublicGithubRepos/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -295,7 +384,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ru.yandex.urfenjust.PublicGithubRepos;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -306,6 +395,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = PublicGithubRepos/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -313,7 +403,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ru.yandex.urfenjust.PublicGithubRepos;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
