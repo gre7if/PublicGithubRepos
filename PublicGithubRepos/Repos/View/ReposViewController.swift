@@ -77,6 +77,7 @@ extension ReposViewController: UICollectionViewDelegate {
         
         guard let vm = viewModel[safe: indexPath.row] else { return }
         let detailedRepoVC = DetailedRepoViewController(viewModel: vm)
+        detailedRepoVC.urlString = "https://github.com/\(vm.ownerLogin)/\(vm.name)"
         navigationController?.pushViewController(detailedRepoVC, animated: true)
     }
 }
