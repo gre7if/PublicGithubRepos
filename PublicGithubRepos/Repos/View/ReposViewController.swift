@@ -10,7 +10,6 @@ import UIKit
 protocol ReposViewControllerInput: AnyObject {
     func setupView(viewModel: [RepoViewModel])
     func reloadView()
-    func stopActivityIndicator()
     func configureUI()
 }
 
@@ -22,12 +21,13 @@ class ReposViewController: UIViewController, ReposViewControllerInput {
     
     var presenter: ReposViewControllerOutput
     private var viewModel = [RepoViewModel]()
-    // for pagging
-    var sinceID = 0
+    
+    // for pagination
+    var isLoading = false
+    private lazy var loadingView = CollectionReusableView()
         
     private lazy var contentView = ReposView()
     private var collectionView: UICollectionView { contentView.collectionView }
-    private var spinner: UIActivityIndicatorView { contentView.spinner }
     
     init(presenter: ReposViewControllerOutput) {
         self.presenter = presenter
@@ -39,15 +39,12 @@ class ReposViewController: UIViewController, ReposViewControllerInput {
     }
     
     func setupView(viewModel: [RepoViewModel]) {
-        self.viewModel = viewModel
+        self.viewModel += viewModel
     }
     
     func reloadView() {
         collectionView.reloadData()
-    }
-    
-    func stopActivityIndicator() {
-        spinner.stopAnimating()
+        isLoading = false
     }
     
     func configureUI() {
@@ -69,8 +66,7 @@ class ReposViewController: UIViewController, ReposViewControllerInput {
         super.viewDidLoad()
         
         configureUI()
-        spinner.startAnimating()
-        presenter.prepareData(id: sinceID)
+        presenter.prepareData(id: 0)
     }
 }
 
@@ -130,5 +126,61 @@ extension ReposViewController: UICollectionViewDelegateFlowLayout {
     // интервал между строками
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         0
+    }
+    
+    // MARK: - Pagination
+    
+    // метод, чтобы вернуть размер для CollectionReusableView, когда пришло время его показать.
+    // for footer
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        if self.isLoading {
+             return CGSize.zero
+         } else {
+             return CGSize(width: collectionView.bounds.size.width, height: 55)
+         }
+    }
+    
+    // устанавливаем многоразовое view - CollectionReusableView в нижнем колонтитуле (footer)
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if kind == UICollectionView.elementKindSectionFooter {
+            let aFooterView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CollectionReusableView.identifier, for: indexPath) as! CollectionReusableView
+            loadingView = aFooterView
+            loadingView.backgroundColor = UIColor.clear
+            return aFooterView
+        }
+        return UICollectionReusableView()
+    }
+    
+    // запускаем и останавливаем spinner, когда footer появляется
+    func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
+        if elementKind == UICollectionView.elementKindSectionFooter {
+            self.loadingView.spinner.startAnimating()
+        }
+    }
+    
+    // запускаем и останавливаем spinner, когда footer исчезает
+    func collectionView(_ collectionView: UICollectionView, didEndDisplayingSupplementaryView view: UICollectionReusableView, forElementOfKind elementKind: String, at indexPath: IndexPath) {
+        if elementKind == UICollectionView.elementKindSectionFooter {
+            self.loadingView.spinner.stopAnimating()
+        }
+    }
+    
+    // Наконец, мы устанавливаем время, в которое мы хотим загрузить больше данных при прокрутке. В этом примере он загрузит больше данных, когда пользователь увидит 10-ю ячейку снизу.
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.row == viewModel.count - 1 && !self.isLoading {
+            loadMoreData()
+        }
+    }
+    
+    func loadMoreData() {
+        guard !self.isLoading else { return }
+        self.isLoading = true
+        DispatchQueue.global().async {
+            // Fake background loading task for 2 seconds
+            sleep(2)
+            // Download more data here
+            guard let lastId = self.viewModel.last?.id else { return }
+            self.presenter.prepareData(id: lastId)
+        }
     }
 }
