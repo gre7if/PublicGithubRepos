@@ -9,12 +9,15 @@ import UIKit
 
 protocol ReposViewControllerInput: AnyObject {
     func setupView(viewModel: [RepoViewModel])
+    func setupViewByRefresh(viewModel: [RepoViewModel])
     func reloadView()
     func configureUI()
+    func stopRefreshing()
 }
 
 protocol ReposViewControllerOutput {
     func prepareData(id: Int)
+    func prepareDataByRefresh(id: Int)
 }
 
 class ReposViewController: UIViewController, ReposViewControllerInput {
@@ -23,9 +26,12 @@ class ReposViewController: UIViewController, ReposViewControllerInput {
     private var viewModel = [RepoViewModel]()
     
     // for pagination
-    var isLoading = false
+    private var isLoading = false
     private lazy var loadingView = CollectionReusableView()
-        
+    
+    // pull-to-refresh
+    private let refreshControl = UIRefreshControl()
+    
     private lazy var contentView = ReposView()
     private var collectionView: UICollectionView { contentView.collectionView }
     
@@ -42,9 +48,17 @@ class ReposViewController: UIViewController, ReposViewControllerInput {
         self.viewModel += viewModel
     }
     
+    func setupViewByRefresh(viewModel: [RepoViewModel]) {
+        self.viewModel = viewModel
+    }
+    
     func reloadView() {
         collectionView.reloadData()
         isLoading = false
+    }
+    
+    func stopRefreshing() {
+        refreshControl.endRefreshing()
     }
     
     func configureUI() {
@@ -56,6 +70,10 @@ class ReposViewController: UIViewController, ReposViewControllerInput {
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         collectionView.delegate = self
         collectionView.dataSource = self
+        // pull-to-refresh
+        refreshControl.addTarget(self, action: #selector(didPullToRefresh), for: .valueChanged)
+        collectionView.alwaysBounceVertical = true
+        collectionView.addSubview(refreshControl)
     }
     
     override func loadView() {
@@ -67,6 +85,11 @@ class ReposViewController: UIViewController, ReposViewControllerInput {
         
         configureUI()
         presenter.prepareData(id: 0)
+    }
+    
+    @objc private func didPullToRefresh() {
+        guard let lastId = self.viewModel.last?.id else { return }
+        presenter.prepareDataByRefresh(id: lastId)
     }
 }
 
@@ -173,10 +196,11 @@ extension ReposViewController: UICollectionViewDelegateFlowLayout {
         }
     }
     
-    func loadMoreData() {
+    private func loadMoreData() {
         guard !self.isLoading else { return }
         self.isLoading = true
-        DispatchQueue.global().async {
+        DispatchQueue.global().async { [weak self] in
+            guard let self = self else { return }
             // Fake background loading task for 2 seconds
             sleep(2)
             // Download more data here

@@ -45,6 +45,5 @@ class DetailedRepoViewController: UIViewController {
     func loadRepository() {
         guard let url = URL(string: urlString) else { return }
         webView.load(URLRequest(url: url))
-        print(url)
     }
 }
