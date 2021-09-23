@@ -79,8 +79,8 @@ extension ReposViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         
-        let detailedRepoVC = DetailedRepoViewController()
-        detailedRepoVC.viewModel = viewModel[safe: indexPath.row]
+        guard let vm = viewModel[safe: indexPath.row] else { return }
+        let detailedRepoVC = DetailedRepoViewController(viewModel: vm)
         navigationController?.pushViewController(detailedRepoVC, animated: true)
     }
 }
@@ -105,26 +105,30 @@ extension ReposViewController: UICollectionViewDelegateFlowLayout {
     // размер элементов
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
+        // высчитываем приблизительную высоту ячейки в зависимости от высоты текста
         if let repo = viewModel[safe: indexPath.row] {
-            let approximateWidthOfDescriptionTextView = view.frame.width - 50 - 10
-            let size = CGSize(width: approximateWidthOfDescriptionTextView, height: 1000)
-            let attributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15)]
-            // оценка высоты ячейки на основе текста repo.description
-            let estimatedFrame = NSString(string: repo.description).boundingRect(
-                with: size,
-                options: .usesLineFragmentOrigin,
-                attributes: attributes,
-                context: nil
-            )
             
-            return CGSize(width: view.frame.width, height: estimatedFrame.height + 50)
+            let approximateWidthOfDescriptionTextView = view.frame.width - 12 - 50 - 12 - 2
+            let size = CGSize(width: approximateWidthOfDescriptionTextView, height: 1000)
+            // размер текста в descriptionTextView
+            let attributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15)]
+            // оценка высоты ячейки на основе текста в repo.description
+            let estimatedFrame = NSString(string: repo.description)
+                .boundingRect(
+                    with: size,
+                    options: .usesLineFragmentOrigin,
+                    attributes: attributes,
+                    context: nil
+                )
+            
+            return CGSize(width: view.frame.width, height: estimatedFrame.height + 66)
         }
         
-        return CGSize(width: view.frame.width, height: 100)
+        return CGSize(width: view.frame.width, height: 150)
     }
 
     // интервал между строками
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        1
+        0
     }
 }

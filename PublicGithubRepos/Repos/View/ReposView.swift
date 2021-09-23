@@ -15,7 +15,7 @@ class ReposView: UIView {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(ReposCollectionViewCell.self, forCellWithReuseIdentifier: ReposCollectionViewCell.identifier)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.backgroundColor = .secondarySystemBackground
+        collectionView.backgroundColor = .white
         return collectionView
     }()
     
