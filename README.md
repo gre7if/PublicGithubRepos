@@ -4,21 +4,21 @@ App using GitHub API and MVP architecture. It displays the list of all public re
 **List of all public repositories**  
 https://docs.github.com/en/rest/reference/repos#list-public-repositories
 
-<img src="" width="300">
+<img src="https://github.com/gre7if/PublicGithubRepos/blob/main/Screenshots/List%20of%20repositories.png" width="300">
 
 **Pagination**  
 
-<img src="" width="300">
+<img src="https://github.com/gre7if/PublicGithubRepos/blob/main/Screenshots/Pagination.png" width="300">
 
 **Pull-to-refresh**  
 
-<img src="" width="300">
+<img src="https://github.com/gre7if/PublicGithubRepos/blob/main/Screenshots/Pull-to-refresh.png" width="300">
 
 **Web page of repository**  
 
-<img src="" width="300">
+<img src="https://github.com/gre7if/PublicGithubRepos/blob/main/Screenshots/Web%20page%20of%20repository.png" width="300">
 
 **Sharing dialog**  
 
-<img src="" width="300">
+<img src="https://github.com/gre7if/PublicGithubRepos/blob/main/Screenshots/Sharing%20dialog.png" width="300">
 
