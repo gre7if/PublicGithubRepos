@@ -98,19 +98,25 @@ class ReposViewController: UIViewController, ReposViewControllerInput, UIGesture
         presenter.prepareDataByRefresh(id: lastId)
     }
     
-    @objc func handleLongPress(gesture: UILongPressGestureRecognizer!) {
+    @objc func handleLongPress(gesture: UILongPressGestureRecognizer) {
         if gesture.state != .began {
             return
         }
 
-        let p = gesture.location(in: self.collectionView)
-
-        if let indexPath = collectionView.indexPathForItem(at: p) {
+        let point = gesture.location(in: self.collectionView)
+        // находим indexPath нажатой ячейки
+        if let indexPath = collectionView.indexPathForItem(at: point) {
+            // получаем ячейку
+            let cell = collectionView.cellForItem(at: indexPath)
             guard let vm = viewModel[safe: indexPath.row] else { return }
             let urlString = "https://github.com/\(vm.ownerLogin)/\(vm.name)"
             // share link of repository by ActivityViewController
             let activityVC = UIActivityViewController(activityItems: [urlString], applicationActivities: nil)
-            activityVC.popoverPresentationController?.sourceView = view
+            // add iPad support
+            activityVC.popoverPresentationController?.sourceView = cell
+            if let bounds = cell?.bounds {
+                activityVC.popoverPresentationController?.sourceRect = bounds
+            }
             present(activityVC, animated: true, completion: nil)
         } else {
             print("Couldn't find index path")
