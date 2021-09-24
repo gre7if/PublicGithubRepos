@@ -74,7 +74,7 @@ class ReposViewController: UIViewController, ReposViewControllerInput, UIGesture
         refreshControl.addTarget(self, action: #selector(didPullToRefresh), for: .valueChanged)
         collectionView.alwaysBounceVertical = true
         collectionView.addSubview(refreshControl)
-        // long press on collectionView
+        // long press on collectionView for sharing
         let lpgr = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
         lpgr.minimumPressDuration = 0.5
         lpgr.delegate = self
@@ -98,7 +98,7 @@ class ReposViewController: UIViewController, ReposViewControllerInput, UIGesture
         presenter.prepareDataByRefresh(id: lastId)
     }
     
-    @objc func handleLongPress(gesture : UILongPressGestureRecognizer!) {
+    @objc func handleLongPress(gesture: UILongPressGestureRecognizer!) {
         if gesture.state != .began {
             return
         }
@@ -110,8 +110,8 @@ class ReposViewController: UIViewController, ReposViewControllerInput, UIGesture
             let urlString = "https://github.com/\(vm.ownerLogin)/\(vm.name)"
             // share link of repository by ActivityViewController
             let activityVC = UIActivityViewController(activityItems: [urlString], applicationActivities: nil)
-            activityVC.popoverPresentationController?.sourceView = self.view
-            self.present(activityVC, animated: true, completion: nil)
+            activityVC.popoverPresentationController?.sourceView = view
+            present(activityVC, animated: true, completion: nil)
         } else {
             print("Couldn't find index path")
         }
