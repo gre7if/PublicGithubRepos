@@ -75,11 +75,11 @@ class ReposViewController: UIViewController, ReposViewControllerInput, UIGesture
         collectionView.alwaysBounceVertical = true
         collectionView.addSubview(refreshControl)
         // long press on collectionView for sharing
-        let lpgr = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
-        lpgr.minimumPressDuration = 0.5
-        lpgr.delegate = self
-        lpgr.delaysTouchesBegan = true
-        self.collectionView.addGestureRecognizer(lpgr)
+//        let lpgr = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
+//        lpgr.minimumPressDuration = 0.5
+//        lpgr.delegate = self
+//        lpgr.delaysTouchesBegan = true
+//        self.collectionView.addGestureRecognizer(lpgr)
     }
     
     override func loadView() {
@@ -98,29 +98,26 @@ class ReposViewController: UIViewController, ReposViewControllerInput, UIGesture
         presenter.prepareDataByRefresh(id: lastId)
     }
     
-    @objc func handleLongPress(gesture: UILongPressGestureRecognizer) {
-        if gesture.state != .began {
-            return
-        }
-
+    @objc func presentShareSheet(gesture: UITapGestureRecognizer) {
         let point = gesture.location(in: self.collectionView)
         // находим indexPath нажатой ячейки
-        if let indexPath = collectionView.indexPathForItem(at: point) {
-            // получаем ячейку
-            let cell = collectionView.cellForItem(at: indexPath)
-            guard let vm = viewModel[safe: indexPath.row] else { return }
-            let urlString = "https://github.com/\(vm.ownerLogin)/\(vm.name)"
-            // share link of repository by ActivityViewController
-            let activityVC = UIActivityViewController(activityItems: [urlString], applicationActivities: nil)
-            // add iPad support
-            activityVC.popoverPresentationController?.sourceView = cell
-            if let bounds = cell?.bounds {
-                activityVC.popoverPresentationController?.sourceRect = bounds
-            }
-            present(activityVC, animated: true, completion: nil)
-        } else {
+        guard let indexPath = collectionView.indexPathForItem(at: point)
+        else {
             print("Couldn't find index path")
+            return
         }
+        // получаем ячейку
+        let cell = collectionView.cellForItem(at: indexPath)
+        guard let vm = viewModel[safe: indexPath.row] else { return }
+        let urlString = "https://github.com/\(vm.ownerLogin)/\(vm.name)"
+        // share link of repository by ActivityViewController
+        let activityVC = UIActivityViewController(activityItems: [urlString], applicationActivities: nil)
+        // add iPad support
+        activityVC.popoverPresentationController?.sourceView = cell
+        if let bounds = cell?.bounds {
+            activityVC.popoverPresentationController?.sourceRect = bounds
+        }
+        present(activityVC, animated: true, completion: nil)
     }
 }
 
@@ -146,7 +143,10 @@ extension ReposViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReposCollectionViewCell.identifier, for: indexPath) as? ReposCollectionViewCell,
               let repo = viewModel[safe: indexPath.row]
         else { return UICollectionViewCell() }
+        
         cell.configure(viewModel: repo)
+        cell.shareButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(presentShareSheet)))
+        
         return cell
     }
 }

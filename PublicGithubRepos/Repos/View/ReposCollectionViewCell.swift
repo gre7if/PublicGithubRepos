@@ -34,14 +34,29 @@ class ReposCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    private let descriptionTextView: UITextView = {
-        let textView = UITextView()
-        textView.font = UIFont.systemFont(ofSize: 15)
-        textView.isEditable = false
-        textView.isScrollEnabled = false
-        textView.backgroundColor = .clear
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        return textView
+    private let descriptionLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 15)
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let shareButton: UIButton = {
+        let button = UIButton()
+        button.layer.cornerRadius = 5
+        button.layer.borderColor = UIColor.link.cgColor
+        button.layer.borderWidth = 1
+        button.setTitle("Share", for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.setTitleColor(.link, for: .normal)
+        button.setImage(UIImage(systemName: "arrowshape.turn.up.right"), for: .normal)
+        button.imageView?.tintColor = .link
+        // Возможность масштабирования содержимого по размеру представления с сохранением соотношения сторон.
+        button.imageView?.contentMode = .scaleAspectFit
+        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -8, bottom: 0, right: 0)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
     
     override init(frame: CGRect) {
@@ -49,7 +64,7 @@ class ReposCollectionViewCell: UICollectionViewCell {
         addSubviews()
         
         layer.borderWidth = 0.5
-        layer.borderColor = #colorLiteral(red: 0.9124323726, green: 0.9125853777, blue: 0.9124122262, alpha: 1)
+        layer.borderColor = Colors.separatorColor.cgColor
     }
     
     required init?(coder: NSCoder) {
@@ -70,7 +85,7 @@ class ReposCollectionViewCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             nameLabel.topAnchor.constraint(equalTo: idLabel.topAnchor),
             nameLabel.leadingAnchor.constraint(equalTo: idLabel.trailingAnchor, constant: 8),
-            nameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 12),
+            nameLabel.trailingAnchor.constraint(equalTo: shareButton.leadingAnchor, constant: 0),
             nameLabel.heightAnchor.constraint(equalToConstant: 20)
         ])
         
@@ -82,10 +97,17 @@ class ReposCollectionViewCell: UICollectionViewCell {
         ])
         
         NSLayoutConstraint.activate([
-            descriptionTextView.topAnchor.constraint(equalTo: ownerLoginLabel.bottomAnchor, constant: -4),
-            descriptionTextView.leadingAnchor.constraint(equalTo: ownerLoginLabel.leadingAnchor, constant: -4),
-            descriptionTextView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            descriptionTextView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            descriptionLabel.topAnchor.constraint(equalTo: ownerLoginLabel.bottomAnchor, constant: -4),
+            descriptionLabel.leadingAnchor.constraint(equalTo: ownerLoginLabel.leadingAnchor, constant: -4),
+            descriptionLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
+            descriptionLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            shareButton.topAnchor.constraint(equalTo: topAnchor, constant: 12),
+            shareButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
+            shareButton.widthAnchor.constraint(equalToConstant: 100),
+            shareButton.heightAnchor.constraint(equalToConstant: 34)
         ])
     }
 
@@ -93,24 +115,32 @@ class ReposCollectionViewCell: UICollectionViewCell {
     // при этом инициализатор заново не вызывается
     override func prepareForReuse() {
         super.prepareForReuse()
-        // при переиспользовании ячейки каждый раз начинаем с nil
+        // сбрасываем все данные ячейки
         idLabel.text = nil
         nameLabel.text = nil
         ownerLoginLabel.text = nil
-        descriptionTextView.text = nil
+        descriptionLabel.text = nil
     }
     
     private func addSubviews() {
         addSubview(idLabel)
         addSubview(nameLabel)
         addSubview(ownerLoginLabel)
-        addSubview(descriptionTextView)
+        addSubview(descriptionLabel)
+        addSubview(shareButton)
     }
     
     func configure(viewModel: RepoViewModel) {
         idLabel.text = "\(viewModel.id)"
         nameLabel.text = "\(viewModel.name)"
         ownerLoginLabel.text = "@\(viewModel.ownerLogin)"
-        descriptionTextView.text = "\(viewModel.description)"
+        descriptionLabel.text = "\(viewModel.description)"
+    }
+}
+
+extension ReposCollectionViewCell {
+    //------------------ Constants -------------
+    private struct Colors {
+        static let separatorColor = #colorLiteral(red: 0.9124323726, green: 0.9125853777, blue: 0.9124122262, alpha: 1)
     }
 }
