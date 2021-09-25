@@ -233,7 +233,7 @@ extension ReposViewController: UICollectionViewDelegateFlowLayout {
         DispatchQueue.global().async { [weak self] in
             guard let self = self else { return }
             // Fake background loading task for 2 seconds
-            sleep(2)
+            sleep(1)
             // Download more data here
             guard let lastId = self.viewModel.last?.id else { return }
             self.presenter.prepareData(id: lastId)
