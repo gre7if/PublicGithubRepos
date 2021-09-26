@@ -45,13 +45,13 @@ class ReposCollectionViewCell: UICollectionViewCell {
     let shareButton: UIButton = {
         let button = UIButton()
         button.layer.cornerRadius = 5
-        button.layer.borderColor = UIColor.link.cgColor
-        button.layer.borderWidth = 1
+//        button.layer.borderColor = UIColor.gray.cgColor
+//        button.layer.borderWidth = 1
         button.setTitle("Share", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-        button.setTitleColor(.link, for: .normal)
+        button.setTitleColor(.gray, for: .normal)
         button.setImage(UIImage(systemName: "arrowshape.turn.up.right"), for: .normal)
-        button.imageView?.tintColor = .link
+        button.imageView?.tintColor = .gray
         // Возможность масштабирования содержимого по размеру представления с сохранением соотношения сторон.
         button.imageView?.contentMode = .scaleAspectFit
         button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -8, bottom: 0, right: 0)
