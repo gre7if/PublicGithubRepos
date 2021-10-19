@@ -220,7 +220,7 @@ extension ReposViewController: UICollectionViewDelegateFlowLayout {
         }
     }
     
-    // Наконец, мы устанавливаем время, в которое мы хотим загрузить больше данных при прокрутке. В этом примере он загрузит больше данных, когда пользователь увидит 10-ю ячейку снизу.
+    // Наконец, мы устанавливаем время, в которое мы хотим загрузить больше данных при прокрутке. В этом примере он загрузит больше данных, когда пользователь увидит 1-ю ячейку снизу.
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if indexPath.row == viewModel.count - 1 && !self.isLoading {
             loadMoreData()
